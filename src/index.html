@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operaciones con Matrices</title>
+    <link rel="stylesheet" href="proyecto_clientes.css">
+</head>
+<body>
+    <h1>Calculadora de Matrices</h1>
+    
+    <div class="matrix-input">
+        <h2>Matriz 1</h2>
+        <label for="rows-matrix1">Filas:</label>
+        <input type="number" id="rows-matrix1" min="1" value="2">
+        <label for="cols-matrix1">Columnas:</label>
+        <input type="number" id="cols-matrix1" min="1" value="2">
+        <button onclick="generateMatrix('matrix1')">Generar</button>
+        <button onclick="fillRandomMatrix('matrix1')">Llenar Aleatoriamente</button>
+        <div id="matrix1"></div>
+    </div>
+    
+    <div class="matrix-input">
+        <h2>Matriz 2</h2>
+        <label for="rows-matrix2">Filas:</label>
+        <input type="number" id="rows-matrix2" min="1" value="2">
+        <label for="cols-matrix2">Columnas:</label>
+        <input type="number" id="cols-matrix2" min="1" value="2">
+        <button onclick="generateMatrix('matrix2')">Generar</button>
+        <button onclick="fillRandomMatrix('matrix2')">Llenar Aleatoriamente</button>
+        <div id="matrix2"></div>
+    </div>
+    
+    <h2>Operaciones</h2>
+    <button onclick="sumarMatrices()">Sumar</button>
+    <button onclick="restarMatrices()">Restar</button>
+    <button onclick="multiplicarMatrices()">Multiplicar</button>
+    <button onclick="transponerMatriz()">Transponer Matriz 1</button>
+    <button onclick="determinanteMatriz()">Determinante de Matriz 1</button>
+    <button onclick="inversaMatriz()">Inversa de Matriz 1</button>
+    
+    <h2>Resultado</h2>
+    <div id="resultado"></div>
+    
+    <script src="proyecto_clientes_web.js"></script>
+    <script>
+        function generateMatrix(matrixId) {
+            const rows = document.getElementById(`rows-${matrixId}`).value;
+            const cols = document.getElementById(`cols-${matrixId}`).value;
+            const container = document.getElementById(matrixId);
+            container.innerHTML = "";
+            
+            let table = document.createElement("table");
+            for (let i = 0; i < rows; i++) {
+                let tr = document.createElement("tr");
+                for (let j = 0; j < cols; j++) {
+                    let td = document.createElement("td");
+                    let input = document.createElement("input");
+                    input.type = "number";
+                    input.id = `${matrixId}-${i}-${j}`;
+                    input.value = 0;
+                    td.appendChild(input);
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            container.appendChild(table);
+        }
+
+        function fillRandomMatrix(matrixId) {
+            const rows = document.getElementById(`rows-${matrixId}`).value;
+            const cols = document.getElementById(`cols-${matrixId}`).value;
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    document.getElementById(`${matrixId}-${i}-${j}`).value = Math.floor(Math.random() * 10);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
